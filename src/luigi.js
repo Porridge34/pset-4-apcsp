@@ -7,16 +7,16 @@ while (height > 24 || height < 1 || Number.isNaN(height) == true || height%1!=0)
 console.log();
 for(let x = 1; x < height+1; x++){
   for(var i = 0; i < height-x; i++){
-    output.push(" ");
+    output = output + " ";
   }for(var i = 0; i < x + 1; i++){
-    output.push("#");
+    output = output + "#";
   }
-  output.push("  ")
+  output = output + "  "
   for(var i = 0; i < x + 1; i++){
-    output.push("#");
+    output = output + "#";
   }for(var i = 0; i < height-x; i++){
-    output.push(" ");
+    output = output + " ";
   }
-  console.log(output.join(""));
-  output = [];
+  console.log(output);
+  output = "";
 }
