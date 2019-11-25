@@ -1,32 +1,30 @@
 const input = require("readline-sync");
-let creditCard = Number(input.question("\nNumber: "));
-let productDigits = 1;
+let creditCard = String(input.question("\nNumber: "));
+let productDigits = 0;
 let sumDigits = Number(0);
 while (creditCard > Number.MAX_SAFE_INTEGER || creditCard < 0 || Number.isNaN(creditCard) == true || creditCard%1!=0){
   creditCard = String(input.question("Number: "));
 }
-for (let i = 0; i < String(creditCard).length - 1; i = (i + 2)){
-  productDigits = (Number(String(creditCard).charAt(String(creditCard).length - i - 1))*2) + productDigits;
-  console.log(String(creditCard).charAt(String(creditCard).length - i - 1));
+let length = String(creditCard).length;
+for (let i = 0; i < length; i += 2){
+  let x = (Number(String(creditCard).charAt(length - i - 2))*2);
+  let lenx = String(x).length;
+  (lenx > 1) ? x = Number(String(x).charAt(1))+Number(String(x).charAt(0)) : x = x;
+  productDigits += x;
 }
-console.log("\n"+productDigits);
-for (let i = 1; i < String(creditCard).length - 1; i = (i+2)){
-  (String(creditCard).charAt(String(creditCard).length-i))sumDigits = Number(String(creditCard).charAt(String(creditCard).length-i)) + sumDigits;
-  console.log(String(creditCard).charAt(String(creditCard).length-i));
+for (let i = 0; i < length; i += 2){
+  sumDigits += Number(String(creditCard).charAt(length-i-1));
 }
-console.log(sumDigits);
 let creditCardNumbers = Number(productDigits) + Number(sumDigits);
 let originalCredit = creditCard;
-creditCard = String(creditCard).slice(0,1);
-console.log(creditCardNumbers);
-console.log("CreditCard is " + creditCard);
+creditCard = String(creditCard).slice(0,2);
 creditCardNumbers = String(creditCardNumbers).charAt(String(creditCardNumbers).length - 1);
 if (creditCardNumbers == "0"){
-  if ((creditCard == 37 || creditCard == 34) && String(originalCredit).length == 15){
-    console.log("\nAmerican Express.");
-  }else if((creditCard >= 51 && creditCard <= 55) && String(originalCredit).length == 16){
+  if ((Number(creditCard) == 37 || Number(creditCard) == 34) && String(originalCredit).length == 15){
+    console.log("\nAmex.");
+  }else if((Number(creditCard) >= 51 && Number(creditCard) <= 55) && String(originalCredit).length == 16){
     console.log("\nMastercard.");
-  }else if((Number(creditCard) == 4) && (String(originalCredit).length == "16" || String(originalCredit).length == "15")){
+  }else if((Number(creditCard) == 4) && (String(originalCredit).length == "16" || String(originalCredit).length == "13")){
     console.log("\nVisa.");
   }
 }else{
